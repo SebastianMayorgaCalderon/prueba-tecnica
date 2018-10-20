@@ -1,0 +1,31 @@
+<div class="row" style="margin: 25px">
+    <div class="col-xs-12">
+      <button (click)="filter()" *ngIf="isInMyList" >{{favoriteView? 'Mostrar Todos' : 'Mostrar favoritos'}}</button>
+      <div *ngIf="list.length==0">
+        <h3>No {{isInMyList? 'ha agregado' : 'hay'}}
+          {{isTournament? 'Torneos' : 'Partidos'}} aun.</h3>
+      </div>
+      <div *ngIf="isTournament" >
+        <app-tournament-item
+          *ngFor="let tournament of showingList; let i = index"
+          [tournament]="tournament"
+          [index]="i">
+        </app-tournament-item>
+      </div>
+      <div *ngIf="!isTournament" >
+        <app-match-list-item
+          *ngFor="let match of showingList; let i = index"
+          [match]="match"
+          [index]="i">
+        </app-match-list-item>
+      </div>
+      <app-pageable-controls
+        [onNextPage]="toNextPage"
+        [onPreviousPage]="toPreviousPage"
+        [currentPage]="currentPage"
+        [cantPages]="cantPages"
+        [canGoBackward]="currentPage != 1"
+        [canGoFoward]="showingList.length == 5"></app-pageable-controls>
+    </div>
+  </div>
+

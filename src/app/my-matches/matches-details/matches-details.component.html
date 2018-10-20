@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="card" *ngIf="match">
+      <div class="card-header">
+        {{match.homeTeam.name}} [{{match.score.fullTime.homeTeam}} - {{match.score.fullTime.awayTeam}}] {{match.awayTeam.name}} :
+        {{match.competition.name}}
+      </div>
+      <div class="card-body">
+        <div class="d-flex justify-content-center">
+          <div class="row" *ngIf="match">
+            <div class="col-md-6" style="text-align: center;">
+              <img *ngIf="match.homeTeamImageUrl" class="img-responsive" [src]="match.homeTeamImageUrl" style="max-height: 300px;   min-height: 300px;">
+              <div *ngIf="!match.homeTeamImageUrl">
+                <app-loader></app-loader>
+              </div>
+              <h3>
+                {{match.homeTeam.name}}
+              </h3>
+              <h5>{{match.score.winner=='HOME_TEAM'? 'Ganador': match.score.winner =='AWAY_TEAM'? 'Perdedor' : 'Empate'}}</h5>
+            </div>
+            <div class="col-md-6" style="text-align: center;">
+              <img *ngIf="match.awayTeamImageUrl" [src]="match.awayTeamImageUrl" class="img-responsive" style="max-height: 300px; min-height: 300px;">
+              <div *ngIf="!match.awayTeamImageUrl">
+                <app-loader></app-loader>
+              </div>
+              <h3>
+                {{match.awayTeam.name}}
+              </h3>
+              <h5>{{match.score.winner=='AWAY_TEAM'? 'Ganador': match.score.winner =='HOME_TEAM'? 'Perdedor' : 'Empate'}}</h5>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="!match">
+            <app-loader></app-loader>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-success" style="margin: 8px" *ngIf="!matchInMyList()" (click)="addToMyMatches(match)">
+          Agregar a mis Partidos
+        </button>
+        <button type="button" class="btn btn-danger" style="margin: 8px" *ngIf="matchInMyList()" (click)="removeFromMyMatches()">
+          Eliminar de mis Partidos
+        </button>
+        <button type="button" class="btn btn-primary" style="margin: 8px" *ngIf="!match.favorite" (click)="addToFavorites(match)">
+          Agregar a Favoritos
+        </button>
+        <button type="button" class="btn btn-danger" style="margin: 8px" *ngIf="match.favorite" (click)="removeFromFavorites()">
+          Eliminar de mis favoritos
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

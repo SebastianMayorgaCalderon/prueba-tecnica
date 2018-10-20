@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div *ngIf="!myMatchList">
+    <app-loader></app-loader>
+  </div>
+  <div class="row">
+    <div class="col-md-5" *ngIf="myMatchList">
+      <div *ngIf="myMatchList.length>0" >
+        <app-list
+         [list]="myMatchList"
+         [isInMyList]="true"
+         [isTournament]="false"></app-list>
+      </div>
+
+    </div>
+    <div class="col-md-7">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

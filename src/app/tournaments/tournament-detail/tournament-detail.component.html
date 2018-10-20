@@ -1,0 +1,64 @@
+<div class="row" *ngIf="tournament">
+  <div class="card">
+    <div class="card-header">
+      {{ getTournamentName() }}
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <div *ngIf="tournament">
+            <div *ngIf="tournament.image">
+              <img [src]="tournament.image" alt="{{ tournament.name }}" class="img-responsive" style="max-height: 300px;">
+            </div>
+          </div>
+          <div *ngIf="!tournament.image">
+            <app-loader></app-loader>
+
+          </div>
+          <div style="margin: 8px">
+            <button type="button" class="btn btn-success" style="margin: 8px" *ngIf="!tournamentsIsInMyList()" (click)="addTournament(tournament)">
+              Agregar a mis torneos
+            </button>
+            <button type="button" class="btn btn-danger" style="margin: 8px" *ngIf="tournamentsIsInMyList()" (click)="removeTournament()">
+              Eliminar de mis torneos
+            </button>
+            <button type="button" class="btn btn-primary" style="margin: 8px" *ngIf="!tournament.favorite" (click)="addTournamentToFavorites()">
+              Agregar a Favoritos
+            </button>
+            <button type="button" class="btn btn-danger" style="margin: 8px" *ngIf="tournament.favorite" (click)="removeTournamentFromFavorites()">
+              Eliminar de mis favoritos
+            </button>
+          </div>
+          <div *ngIf="!tournament">
+            <app-loader></app-loader>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngIf="showingMatchesList" style="width: 100%">
+          <table class="table" style="width: 100%">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Partidos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let match of showingMatchesList" style="cursor: pointer;" (click)="onMatchClick(match)">
+                <a [routerLink]="[match.id]">
+                  <td>{{match.homeTeam.name}} [{{match.score.fullTime.homeTeam}} - {{match.score.fullTime.awayTeam}}] {{match.awayTeam.name}}</td>
+                </a>
+              </tr>
+            </tbody>
+          </table>
+          <app-pageable-controls [onNextPage]="toNexPage" [onPreviousPage]="toPreviousPage" [currentPage]="currentPage" [cantPages]="cantPages"
+            [canGoBackward]="currentPage!=1" [canGoFoward]="showingMatchesList.length == 5"></app-pageable-controls>
+        </div>
+        <div *ngIf="!showingMatchesList">
+          <app-loader>
+          </app-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

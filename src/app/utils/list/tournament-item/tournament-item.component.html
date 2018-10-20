@@ -1,0 +1,25 @@
+<a
+  style="cursor: pointer;
+  width: 455px;"
+  [routerLink]="[tournament.id]"
+  routerLinkActive="active"
+  class="list-group-item clearfix">
+  <div class="pull-left">
+    <h4 class="l  ist-group-item-heading">{{ tournament.name }}</h4>
+    <p class="list-group-item-text">{{ tournament.code }}</p>
+    <p class="list-group-item-text">{{ tournament.area.name }}</p>
+  </div>
+  <span class="pull-right">
+      <img
+        *ngIf="tournament.image"
+        [src]="tournament.image"
+        alt="{{ tournament.name }}"
+        class="img-responsive"
+        style="max-height: 80px;">
+        <div *ngIf="!tournament.image">
+          <app-loader></app-loader>
+        </div>
+    </span>
+  <!-- <i class="fa fa-star pull-right" style="font-size: 50px; color: black"></i> -->
+</a>
+

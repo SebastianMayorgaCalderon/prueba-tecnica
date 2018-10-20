@@ -1,0 +1,16 @@
+<div class="container-fluid">
+    <div *ngIf="!tournamentsList">
+      <app-loader></app-loader>
+    </div>
+    <div class="row">
+      <div class="col-md-5" *ngIf="tournamentsList">
+          <app-list
+          [list]="tournamentsList"
+          [isInMyList]="true"
+          [isTournament]="true"></app-list>
+      </div>
+      <div class="col-md-7">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

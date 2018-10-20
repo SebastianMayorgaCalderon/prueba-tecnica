@@ -1,0 +1,16 @@
+#loading {
+  width: 70px;
+  height: 70px;
+  border: 10px solid #ccc;
+  border-top-color: #2C3942;
+  border-radius: 150%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  animation: round 2s linear infinite;
+
+}
+@keyframes round {
+  from{ transform: rotate(0deg)}
+  to{transform: rotate(360deg)}
+}

@@ -1,0 +1,40 @@
+<a
+  style="cursor: pointer;
+  width: 455px;"
+  [routerLink]="[match.competition.id,match.id]"
+  routerLinkActive="active"
+  class="list-group-item clearfix">
+  <div class="row">
+    <div class="pull-left">
+      <h4 class="l  ist-group-item-heading">{{ match.awayTeam.name }} - {{match.homeTeam.name}}</h4>
+      <p class="list-group-item-text">{{ match.competition.name }}</p>
+      <p class="list-group-item-text">{{ match.status }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <span class="pull-left">
+      <img
+        *ngIf="match.homeTeamImageUrl"
+        [src]="match.homeTeamImageUrl"
+        alt="{{ match.name }}"
+        class="img-responsive"
+        style="max-height: 80px;">
+        <div *ngIf="!match.homeTeamImageUrl">
+          <app-loader></app-loader>
+        </div>
+    </span><span class="pull-right">
+      <img
+        *ngIf="match.awayTeamImageUrl"
+        [src]="match.awayTeamImageUrl"
+        alt="{{ match.name }}"
+        class="img-responsive"
+        style="max-height: 80px;">
+        <div *ngIf="!match.awayTeamImageUrl">
+          <app-loader></app-loader>
+        </div>
+    </span>
+  </div>
+
+  <!-- <i class="fa fa-star pull-right" style="font-size: 50px; color: black"></i> -->
+</a>
+
